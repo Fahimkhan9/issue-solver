@@ -1,0 +1,24 @@
+.login{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+  
+}
+.login__img{
+    width: 30%;
+     margin-bottom: 200px; 
+}
+.login__button{
+    width: 30%;
+    
+}
+ @media (max-width: 600px){
+     .login__img{
+width: 100%;
+     }
+     .login__button{
+         width: 60%;
+     }
+ }

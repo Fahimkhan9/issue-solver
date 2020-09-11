@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { Avatar, IconButton } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import db from './firebase';
+import './CommentCard.css'
 const useStyles = makeStyles({
   root: {
     width:"48%",
@@ -37,27 +38,27 @@ setLikeColor(pre => likeColor? '' : "primary")
 }
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className='card' variant="outlined">
       <CardContent>
           <div className="" style={{display:"flex",alignItems:'center'}}>
-              <Avatar/>
+              <Avatar src={props.photoURL}/>
               <Typography style={{marginLeft:'5px'}}>
-                  UserName
+                  {props.name}
               </Typography>
           </div>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+        <Typography variant="h5" >
          {props.comment}
         </Typography>
         
     
       </CardContent>
-      <CardActions style={{alignItems:'center'}} onClick={addLike}  >
-          <IconButton >
+      {/* <CardActions style={{alignItems:'center'}} onClick={addLike}  > */}
+          {/* <IconButton >
   <b>{likeCount}</b>
              <ThumbUpIcon color={likeColor} />
              
           </IconButton>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

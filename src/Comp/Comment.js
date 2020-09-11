@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import db from './firebase';
 import CommentCard from './CommentCard';
-
+import './Comment.css'
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -14,15 +14,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Comment() {
+ function Comment(props) {
   const classes = useStyles();
   const [comment,setComment] = useState('')
   const [commentList,setCommentList] = useState([])
-
+const [uniqueCommentName,setUniqueCommmentName] = useState(1)
   
  useEffect(() => {
 
-    db.collection("comment").onSnapshot(snapshot =>  {
+    db.collection(`comment${props.title}`).onSnapshot(snapshot =>  {
  
         setCommentList(snapshot.docs.map(doc => (
           {
@@ -34,25 +34,28 @@ const useStyles = makeStyles((theme) => ({
  },[])
 
 const addComment = () => {
-    db.collection("comment").add({
+  setUniqueCommmentName(pre => pre+1)
+    db.collection(`comment${props.title}`).add({
         comment: comment,
        
 
     })
+    
 }
+console.log(uniqueCommentName);
 
 // console.log(commentList);
   return (
       <>
        {
-            commentList.map(info => <CommentCard comment={info.data.comment} /> )
+            commentList.map(info => <CommentCard comment={info.data.comment} name={props.name} photoURL={props.photoURL} /> )
       }
 
-    <form className={classes.root}  style={{display:'flex',flexDirection:'column',alignItems:'center'}} noValidate autoComplete="off">
+    <form className="comment__form"  noValidate autoComplete="off">
   
       
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={(e) => setComment(e.target.value)} />
-      <Button color="primary" fontSize="large" variant="contained"style={{width:'35%'}} onClick={addComment}   > Post</Button>
+      <TextField id="outlined-basic" label="Add a Comment" variant="outlined" onChange={(e) => setComment(e.target.value)} />
+      <Button className='comment__button' style={{width:"90%",margin: '10px auto'}}  color="primary" fontSize="large" variant="contained"onClick={addComment}   > Post</Button>
 
     </form>
 
