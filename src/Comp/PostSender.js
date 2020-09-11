@@ -35,11 +35,13 @@ function PostSender() {
   };
   console.log(id);
   const classes = useStyles();
-  const handleBlur = (e) => {};
-  const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const handleBlur = (e) => {
+    
+  };
+  // const { register, handleSubmit, watch, errors } = useForm();
+  // const onSubmit = (data) => console.log(data);
 
-  console.log(watch("example"));
+  // console.log(watch("example"));
   return (
     <>
       <Typography variant="h3" className="heroTitle">
@@ -59,9 +61,11 @@ function PostSender() {
         className="form__input"
           id="postTile"
           value={title}
+          name="title"
           label="Issue Title"
           placeholder="Issue Title"
           variant="outlined"
+          required
           onChange={(e) => setTitle(e.target.value)}
         />
 
