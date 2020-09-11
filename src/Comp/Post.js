@@ -1,5 +1,4 @@
 import React from "react";
-
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -20,10 +19,13 @@ function Post(props) {
               {props.name}
             </Typography>
           </div>
+          <small>{new Date(props.timestamp?.toDate()).toUTCString()}</small>
           <Typography variant="h5" component="h2">
             {props.title}
           </Typography>
+
           <br />
+          <hr />
           <Typography style={{ fontSize: "30px" }} component="p">
             {props.body}
             <br />

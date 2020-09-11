@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import db from "./firebase";
+import firebase from "firebase";
 import CommentCard from "./CommentCard";
 import "./Comment.css";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "50%",
-    },
-  },
-}));
+
 
 function Comment(props) {
-  const classes = useStyles();
+
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [uniqueCommentName, setUniqueCommmentName] = useState(1);
@@ -35,6 +29,7 @@ function Comment(props) {
     setUniqueCommmentName((pre) => pre + 1);
     db.collection(`comment${props.title}`).add({
       comment: comment,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setComment("")
   };
@@ -46,6 +41,7 @@ function Comment(props) {
       {commentList.map((info) => (
         <CommentCard
           comment={info.data.comment}
+          timestamp={info.data.timestamp}
           name={props.name}
           photoURL={props.photoURL}
         />
@@ -69,7 +65,7 @@ function Comment(props) {
           onClick={addComment}
         >
         
-          Post
+          Add a Comment
         </Button>
       </form>
     </>
