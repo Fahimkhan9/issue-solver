@@ -3,7 +3,7 @@ import Header from "./Comp/Header";
 import Post from "./Comp/Post";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PostDetail from "./Comp/PostDetail";
-import db, { auth, googleProvider } from "./Comp/firebase";
+import db, { auth, googleProvider, githubProvider } from "./Comp/firebase";
 import PostSender from "./Comp/PostSender";
 import { Typography } from "@material-ui/core";
 import Login from "./Comp/Login";
@@ -31,14 +31,22 @@ function App() {
   const signin = () => {
     auth
       .signInWithPopup(googleProvider)
-      .then((res) => {
+      .then(res => {
         setUserInfo(res.user);
         setIsSignedIn(true);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(err => {
+        alert(err);
       });
   };
+  const signingithub = () => {
+    auth.signInWithPopup(githubProvider)
+    .then(res => {
+      setUserInfo(res.user);
+      setIsSignedIn(true);              
+    })
+    .catch(err => alert(err))
+  }
   const signout = () => {
     if (window.confirm("Are you want to SIGNOUT?")) {
       auth
@@ -83,7 +91,7 @@ function App() {
                   ))}
                 </>
               ) : (
-                <Login signin={signin} />
+                <Login signin={signin} signingithub={signingithub} />
               )}
             </Route>
 

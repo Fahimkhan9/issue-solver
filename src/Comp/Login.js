@@ -10,7 +10,7 @@ function Login(props) {
         src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Issue_logo.png"
         alt=""
       />
-
+    
       <Button
         className="login__button"
         color="primary"
@@ -19,6 +19,16 @@ function Login(props) {
         onClick={props.signin}
       >
         Sign In With GOOGLE
+      </Button>
+      <Button
+      style={{marginTop: '10px'}}
+        className="login__button"
+        color="primary"
+        variant="contained"
+        fontSize="large"
+        onClick={props.signingithub}
+      >
+        Sign In With GITHUB
       </Button>
     </div>
   );
